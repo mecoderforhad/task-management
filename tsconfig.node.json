@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true, 
+    "types": ["@types/node", "@types/react", "@types/dayjs"]
+  },
+  "include": ["vite.config.ts"]
+}
