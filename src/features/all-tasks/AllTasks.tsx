@@ -15,25 +15,35 @@ import { Tasks } from 'src/types/types';
 
 export default function AllTasks() {
   const tasks = useSelector(selectAllTasks);
+  const [searchTitle, setSearchTitle] = useState('');
   const [searchStatus, setSearchStatus] = useState('');
 
   // Filter tasks based on search status
   const filteredTasks = tasks.filter((task: Tasks) =>
+    task.title.toLowerCase().includes(searchTitle.toLowerCase()) &&
     task.status.toLowerCase().includes(searchStatus.toLowerCase())
   );
 
   if (tasks.length === 0) {
     return (
       <Grid>
-        <Typography>Please Add Some Task.</Typography>
-        <Link to="/add-task">Add a new task.</Link>
+        <Typography>Please Add Some Task. <Link to="/add-task">Add a New Task.</Link></Typography>
       </Grid>
     );
   }
 
   return (
-    <Grid container direction="column" sx={{my: 2}}>
-      <Grid item>
+    <Grid container sx={{my: 1}}>
+      <Grid item lg={2.5}>
+        <TextField
+          label="Search by Title"
+          variant="outlined"
+          value={searchTitle}
+          onChange={(e) => setSearchTitle(e.target.value)}
+        />
+      </Grid>
+
+      <Grid item lg={2.5}>
         <TextField
           label="Search by Status"
           variant="outlined"
@@ -46,7 +56,7 @@ export default function AllTasks() {
         {filteredTasks.length === 0 ? (
           <Typography>No tasks found with the given status.</Typography>
         ) : (
-          <Grid container sx={{ display: 'flex', justifyItems: 'center', justifyContent: "flex-start" }}>
+          <Grid container sx={{ display: 'flex', justifyItems: 'center', justifyContent: "flex-start", width: "1200px"}}>
             <TaskCard tasks={filteredTasks} />
           </Grid>
         )}

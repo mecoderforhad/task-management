@@ -15,7 +15,7 @@ const UpdateTaskForm = () => {
   const navigate = useNavigate();
 
   // Fetch the current task by ID from the state
-  const task = useSelector((state: any) => state.tasks.find((singleTask: Tasks) => task.id === id));
+  const task = useSelector((state: any) => state.tasks.find((singleTask: Tasks) => singleTask.id === id));
 
   const methods = useForm({
     defaultValues: {

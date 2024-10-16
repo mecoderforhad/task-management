@@ -43,7 +43,13 @@ const AddTaskForm = () => {
                 variant="outlined"
                 size="small"
                 sx={{ width: '100%' }}
-                {...register('title', { required: 'Title is required' })}
+                {...register('title', {
+                  required: 'Title is required',
+                  maxLength: {
+                    value: 100,
+                    message: 'Title must be 100 characters or less'
+                  }
+                })}
                 error={!!errors.title}
                 helperText={errors.title?.message?.toString()}
               />
@@ -55,7 +61,13 @@ const AddTaskForm = () => {
                 multiline
                 rows={4}
                 sx={{ width: '100%' }}
-                {...register('description', { required: 'Description is required' })}
+                {...register('description', {
+                  required: 'Description is required',
+                  maxLength: {
+                    value: 255,
+                    message: 'Description must be 255 characters or less'
+                  }
+                })}
                 error={!!errors.description}
                 helperText={errors.description?.message?.toString()}
               />
