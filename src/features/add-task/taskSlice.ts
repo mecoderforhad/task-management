@@ -12,7 +12,6 @@ const taskSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action) => {
-      console.log("action.payload", action.payload)
       const newTask = {
         id: nanoid(),
         title: action.payload.title,
@@ -24,11 +23,22 @@ const taskSlice = createSlice({
       state.push(newTask);
       localStorage.setItem("tasks", JSON.stringify(state));
     },
+
+    updateTask: (state, action) => {
+      const { id, ...updatedTaskFields } = action.payload;
+      const taskIndex = state.findIndex((task: any) => task.id === id);
+      if (taskIndex !== -1) {
+        state[taskIndex] = { ...state[taskIndex], ...updatedTaskFields };
+        localStorage.setItem("tasks", JSON.stringify(state));
+      }
+    },
+
     removeTask: (state, action) => {
       const taskIndex = state.findIndex((task: any) => task.id === action.payload);
       state.splice(taskIndex, 1);
       localStorage.setItem("tasks", JSON.stringify(state));
     },
+
     toggleTaskCompleted: (state, action) => {
       const task = state.find((singleTask: any) => singleTask.id === action.payload);
       if (task) {
@@ -42,18 +52,10 @@ const taskSlice = createSlice({
           localStorage.setItem("tasks", JSON.stringify(state));
       }
     },
-    updateTask: (state, action) => {
-      const { id, ...updatedTaskFields } = action.payload;
-      const taskIndex = state.findIndex((task: any) => task.id === id);
-      if (taskIndex !== -1) {
-        state[taskIndex] = { ...state[taskIndex], ...updatedTaskFields };
-        localStorage.setItem("tasks", JSON.stringify(state));
-      }
-    },
   },
 });
 
-export const { addTask, removeTask, toggleTaskCompleted, updateTask } = taskSlice.actions;
+export const { addTask, updateTask, removeTask, toggleTaskCompleted } = taskSlice.actions;
 export default taskSlice.reducer;
 
 export const selectAllTasks = (state: any) => state.tasks;

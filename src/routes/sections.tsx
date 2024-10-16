@@ -12,10 +12,10 @@ import { DashboardLayout } from 'src/layouts/dashboard';
 
 export const HomePage = lazy(() => import('src/pages/home'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
-export const AllTaskPage = lazy(() => import('src/features/all-tasks/components/AllTasks'));
+export const AllTaskPage = lazy(() => import('src/features/all-tasks/AllTasks'));
 export const AddTaskPage = lazy(() => import('src/features/add-task/components/AddTask'));
-export const CompletedTaskPage = lazy(() => import('src/features/completed-tasks/components/CompletedTasks'));
-export const PendingTaskPage = lazy(() => import('src/features/pending-tasks/components/PendingTasks'));
+export const CompletedTaskPage = lazy(() => import('src/features/completed-tasks/CompletedTasks'));
+export const PendingTaskPage = lazy(() => import('src/features/pending-tasks/PendingTasks'));
 export const UserPage = lazy(() => import('src/pages/user'));
 export const SignInPage = lazy(() => import('src/pages/sign-in'));
 export const ProductsPage = lazy(() => import('src/pages/products'));

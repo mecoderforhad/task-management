@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { Box, Grid, Button, TextField, Typography } from '@mui/material';
@@ -10,13 +11,16 @@ import { addTask } from "../taskSlice";
 const AddTaskForm = () => {
   const dispatch = useDispatch();
   const methods = useForm();
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = methods;
+
   const onSubmit = (data: any) => {
     dispatch(addTask(data));
+    navigate("/")
   };
 
   const validateEndDate = (endDate: string) => {

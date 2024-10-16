@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 
 import { CONFIG } from 'src/config-global';
-import AddTask from 'src/features/all-tasks/components/AllTasks';
+import AddTask from 'src/features/all-tasks/AllTasks';
 
 // ----------------------------------------------------------------------
 

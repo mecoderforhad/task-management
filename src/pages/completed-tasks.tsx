@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 
 import { CONFIG } from 'src/config-global';
-import CompletedTasks from 'src/features/completed-tasks/components/CompletedTasks';
+import CompletedTasks from 'src/features/completed-tasks/CompletedTasks';
 
 
 // ----------------------------------------------------------------------
