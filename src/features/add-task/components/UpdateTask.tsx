@@ -1,17 +1,31 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import type { Tasks } from "src/types/types";
+
+import { useDispatch, useSelector } from "react-redux";
 import { useForm, FormProvider } from 'react-hook-form';
+import { useParams, useNavigate } from "react-router-dom";
 
 import { Box, Grid, Button, TextField, Typography } from '@mui/material';
 
-import { addTask } from "../taskSlice";
+import { updateTask } from "../taskSlice";
 
-
-const AddTaskForm = () => {
+const UpdateTaskForm = () => {
+  const { id } = useParams(); // Get task ID from URL params
   const dispatch = useDispatch();
-  const methods = useForm();
   const navigate = useNavigate();
+
+  // Fetch the current task by ID from the state
+  const task = useSelector((state: any) => state.tasks.find((singleTask: Tasks) => singleTask.id === id));
+
+  const methods = useForm({
+    defaultValues: {
+      title: task?.title || '',
+      description: task?.description || '',
+      startDate: task?.startDate || '',
+      endDate: task?.endDate || '',
+    }
+  });
+
   const {
     handleSubmit,
     register,
@@ -19,8 +33,8 @@ const AddTaskForm = () => {
   } = methods;
 
   const onSubmit = (data: any) => {
-    dispatch(addTask(data));
-    navigate("/")
+    dispatch(updateTask({ id, ...data }));  // Dispatch update with task ID
+    navigate("/");
   };
 
   const validateEndDate = (endDate: string) => {
@@ -34,7 +48,7 @@ const AddTaskForm = () => {
         <Box>
           <Grid container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Grid item lg={6} md={12} sm={12} xs={7} sx={{ m: 1 }}>
-              <Typography variant="h4">Add New Task</Typography>
+              <Typography variant="h4">Update Task</Typography>
             </Grid>
 
             <Grid item lg={6} md={12} sm={12} xs={7} sx={{ m: 1 }}>
@@ -43,13 +57,7 @@ const AddTaskForm = () => {
                 variant="outlined"
                 size="small"
                 sx={{ width: '100%' }}
-                {...register('title', {
-                  required: 'Title is required',
-                  maxLength: {
-                    value: 100,
-                    message: 'Title must be 100 characters or less'
-                  }
-                })}
+                {...register('title', { required: 'Title is required' })}
                 error={!!errors.title}
                 helperText={errors.title?.message?.toString()}
               />
@@ -61,13 +69,7 @@ const AddTaskForm = () => {
                 multiline
                 rows={4}
                 sx={{ width: '100%' }}
-                {...register('description', {
-                  required: 'Description is required',
-                  maxLength: {
-                    value: 255,
-                    message: 'Description must be 255 characters or less'
-                  }
-                })}
+                {...register('description', { required: 'Description is required' })}
                 error={!!errors.description}
                 helperText={errors.description?.message?.toString()}
               />
@@ -88,9 +90,6 @@ const AddTaskForm = () => {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  inputProps={{
-                    min: new Date().toISOString().split('T')[0], // Sets minimum date to today
-                  }}
                   {...register('startDate', { required: 'Start Date is required' })}
                   error={!!errors.startDate}
                   helperText={errors.startDate?.message?.toString()}
@@ -106,9 +105,6 @@ const AddTaskForm = () => {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  inputProps={{
-                    min: new Date().toISOString().split('T')[0], // Sets minimum date to today
-                  }}
                   {...register('endDate', {
                     required: 'End Date is required',
                     validate: validateEndDate,
@@ -121,7 +117,7 @@ const AddTaskForm = () => {
 
             <Grid item lg={6} md={12} sm={12} xs={7} sx={{ m: 1 }}>
               <Button type="submit" variant="contained" sx={{ width: '100%' }}>
-                Add
+                Update
               </Button>
             </Grid>
           </Grid>
@@ -131,4 +127,4 @@ const AddTaskForm = () => {
   );
 };
 
-export default AddTaskForm;
+export default UpdateTaskForm;
