@@ -1,14 +1,18 @@
+/* eslint-disable @typescript-eslint/consistent-type-imports */
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Grid } from '@mui/material';
 
 import TaskCard from 'src/common/TaskCard';
 
-import { selectAllTasks } from '../add-task/taskSlice';
-
 import { Tasks } from 'src/types/types';
 
-import { Link } from 'react-router-dom';
+
+// eslint-disable-next-line perfectionist/sort-imports
+import { selectAllTasks } from '../add-task/taskSlice';
+
+
 
 export default function PendingTasks() {
   const tasks = useSelector(selectAllTasks);

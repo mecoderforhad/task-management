@@ -15,7 +15,7 @@ import { toggleTaskCompleted } from "src/features/add-task/taskSlice";
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import { Tasks } from 'src/types/types';
 
-export default function TaskCard(tasks : Tasks) {
+export default function TaskCard({tasks} : any) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleToogleTask = (task: Tasks)=> {
