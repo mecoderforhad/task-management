@@ -7,14 +7,18 @@ import { Grid, TextField, Typography } from '@mui/material';
 import TaskCard from 'src/common/TaskCard';
 import { selectAllTasks } from 'src/features/add-task/taskSlice';
 
+// eslint-disable-next-line perfectionist/sort-imports
 import { Link } from 'react-router-dom';
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import { Tasks } from 'src/types/types';
 
 export default function AllTasks() {
   const tasks = useSelector(selectAllTasks);
   const [searchStatus, setSearchStatus] = useState('');
 
   // Filter tasks based on search status
-  const filteredTasks = tasks.filter((task) =>
+  const filteredTasks = tasks.filter((task: Tasks) =>
     task.status.toLowerCase().includes(searchStatus.toLowerCase())
   );
 

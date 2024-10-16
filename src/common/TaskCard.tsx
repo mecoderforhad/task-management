@@ -29,7 +29,7 @@ export default function TaskCard({tasks} : any) {
         <Grid key={task.id} item lg={3} sx={{ my: 2 }}>
           <Stack spacing={4} direction="row" sx={{ color: 'action.active' }}>
             <Badge color= {task.status === "Completed" ? "success" : "secondary"} badgeContent={task.status}>
-              <Card sx={{ maxWidth: 250 }}>
+              <Card sx={{ width: "250px" }}>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {task.title}
@@ -38,7 +38,7 @@ export default function TaskCard({tasks} : any) {
                     {task.description}
                   </Typography>
                 </CardContent>
-                <CardActions>
+                <CardActions sx={{display: "flex", justifyContent:"space-between"}}>
                   <Link to={`/update-task/${task.id}`}>
                     <Button size="small">Edit</Button>
                   </Link>
