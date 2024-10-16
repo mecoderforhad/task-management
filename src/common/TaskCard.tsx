@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { format, differenceInDays } from 'date-fns';
+import { differenceInDays } from 'date-fns';
 import { Link, useNavigate } from "react-router-dom";
 
 import Card from '@mui/material/Card';

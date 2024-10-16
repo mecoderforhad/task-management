@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Grid } from '@mui/material';
@@ -5,9 +6,8 @@ import { Grid } from '@mui/material';
 import TaskCard from 'src/common/TaskCard';
 import { selectAllTasks } from 'src/features/add-task/taskSlice';
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import { Tasks } from 'src/types/types';
-
-import { Link } from 'react-router-dom';
 
 export default function CompletedTasks() {
   const tasks = useSelector(selectAllTasks);
