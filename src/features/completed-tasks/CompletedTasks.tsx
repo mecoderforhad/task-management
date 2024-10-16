@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 export default function CompletedTasks() {
   const tasks = useSelector(selectAllTasks);
 
-  const filteredCompletedTasks = tasks.filter((task: Tasks) => task.status === 'completed');
+  const filteredCompletedTasks = tasks.filter((task: Tasks) => task.status === 'Completed');
 
   console.log("filteredCompletedTasks", filteredCompletedTasks)
 

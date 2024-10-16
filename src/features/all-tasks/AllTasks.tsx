@@ -1,7 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Grid } from '@mui/material';
+import { Grid, TextField, Typography } from '@mui/material';
 
 import TaskCard from 'src/common/TaskCard';
 import { selectAllTasks } from 'src/features/add-task/taskSlice';
@@ -10,17 +11,42 @@ import { Link } from 'react-router-dom';
 
 export default function AllTasks() {
   const tasks = useSelector(selectAllTasks);
+  const [searchStatus, setSearchStatus] = useState('');
+
+  // Filter tasks based on search status
+  const filteredTasks = tasks.filter((task) =>
+    task.status.toLowerCase().includes(searchStatus.toLowerCase())
+  );
 
   if (tasks.length === 0) {
     return (
       <Grid>
-        Please Add Some Task. <Link to="/add-task">Add Task.</Link>
+        <Typography>Please Add Some Task.</Typography>
+        <Link to="/add-task">Add a new task.</Link>
       </Grid>
     );
   }
+
   return (
-    <Grid container sx={{ display: 'flex', justifyItems: 'center', justifyContent: 'center' }}>
-      <TaskCard tasks={tasks} />
+    <Grid container direction="column" sx={{my: 2}}>
+      <Grid item>
+        <TextField
+          label="Search by Status"
+          variant="outlined"
+          value={searchStatus}
+          onChange={(e) => setSearchStatus(e.target.value)}
+        />
+      </Grid>
+
+      <Grid item>
+        {filteredTasks.length === 0 ? (
+          <Typography>No tasks found with the given status.</Typography>
+        ) : (
+          <Grid container sx={{ display: 'flex', justifyItems: 'center', justifyContent: "flex-start" }}>
+            <TaskCard tasks={filteredTasks} />
+          </Grid>
+        )}
+      </Grid>
     </Grid>
   );
 }

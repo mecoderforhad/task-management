@@ -14,6 +14,7 @@ export const HomePage = lazy(() => import('src/pages/home'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
 export const AllTaskPage = lazy(() => import('src/features/all-tasks/AllTasks'));
 export const AddTaskPage = lazy(() => import('src/features/add-task/components/AddTask'));
+export const UpdateTaskPage = lazy(() => import('src/features/add-task/components/UpdateTask'));
 export const CompletedTaskPage = lazy(() => import('src/features/completed-tasks/CompletedTasks'));
 export const PendingTaskPage = lazy(() => import('src/features/pending-tasks/PendingTasks'));
 export const UserPage = lazy(() => import('src/pages/user'));
@@ -52,6 +53,7 @@ export function Router() {
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
         { path: 'add-task', element: <AddTaskPage /> },
+        { path: 'update-task/:id', element: <UpdateTaskPage /> },
         { path: 'completed-tasks', element: <CompletedTaskPage /> },
         { path: 'pending-tasks', element: <PendingTaskPage /> },
       ],

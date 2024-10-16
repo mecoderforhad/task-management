@@ -26,12 +26,16 @@ const taskSlice = createSlice({
 
     updateTask: (state, action) => {
       const { id, ...updatedTaskFields } = action.payload;
+    
       const taskIndex = state.findIndex((task: any) => task.id === id);
+    
       if (taskIndex !== -1) {
         state[taskIndex] = { ...state[taskIndex], ...updatedTaskFields };
+    
+        // Optionally persist tasks in localStorage
         localStorage.setItem("tasks", JSON.stringify(state));
       }
-    },
+    },    
 
     removeTask: (state, action) => {
       const taskIndex = state.findIndex((task: any) => task.id === action.payload);
@@ -40,18 +44,18 @@ const taskSlice = createSlice({
     },
 
     toggleTaskCompleted: (state, action) => {
-      const task = state.find((singleTask: any) => singleTask.id === action.payload);
+      const task = state.find((singleTask: Task) => singleTask.id === action.payload);
+    
       if (task) {
-         if (task.status !== "completed") {
-           task.status = "Completed";
-           task.endDate = new Date().toISOString();
-         } else {
-           task.status = "Pending";
-           task.endDate = null;
-         }
-          localStorage.setItem("tasks", JSON.stringify(state));
+        // Toggle status between "Completed" and "Pending"
+        task.status = task.status !== "Completed" ? "Completed" : "Pending";
+        task.endDate = task.status === "Completed" ? new Date().toISOString() : null;
+    
+        // Save to localStorage
+        localStorage.setItem("tasks", JSON.stringify(state));
       }
     },
+    
   },
 });
 
