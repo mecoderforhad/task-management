@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import { useTheme } from '@mui/material/styles';
 import { Grid, TextField, Typography } from '@mui/material';
 
 import TaskCard from 'src/common/TaskCard';
@@ -10,13 +11,20 @@ import { selectAllTasks } from 'src/features/add-task/taskSlice';
 // eslint-disable-next-line perfectionist/sort-imports
 import { Link } from 'react-router-dom';
 
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import { Tasks } from 'src/types/types';
+
 
 export default function AllTasks() {
   const tasks = useSelector(selectAllTasks);
   const [searchTitle, setSearchTitle] = useState('');
   const [searchStatus, setSearchStatus] = useState('');
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('lg'));
+
+  console.log("matches", matches)
 
   // Filter tasks based on search status
   const filteredTasks = tasks.filter((task: Tasks) =>
@@ -33,8 +41,8 @@ export default function AllTasks() {
   }
 
   return (
-    <Grid container sx={{my: 1}}>
-      <Grid item lg={2.5}>
+    <Grid container>
+      <Grid item lg={2.5} md={12} sm={12} xs={12} sx={{my: 1, mx: 1}}>
         <TextField
           label="Search by Title"
           variant="outlined"
@@ -43,7 +51,7 @@ export default function AllTasks() {
         />
       </Grid>
 
-      <Grid item lg={2.5}>
+      <Grid item lg={2.5} md={12} sm={12} xs={12} sx={{my: 1, mx: 1}}>
         <TextField
           label="Search by Status"
           variant="outlined"
@@ -52,11 +60,11 @@ export default function AllTasks() {
         />
       </Grid>
 
-      <Grid item>
+      <Grid item lg={12}>
         {filteredTasks.length === 0 ? (
-          <Typography>No tasks found with the given status.</Typography>
+          <Typography sx={{my: 3, mx: 1}}>No tasks found with the given status.</Typography>
         ) : (
-          <Grid container sx={{ display: 'flex', justifyItems: 'center', justifyContent: "flex-start", width: "1200px"}}>
+          <Grid container sx={{ display: 'flex', justifyItems: 'center', justifyContent: "flex-start", width: matches ? "auto" :"1200px"}}>
             <TaskCard tasks={filteredTasks} />
           </Grid>
         )}

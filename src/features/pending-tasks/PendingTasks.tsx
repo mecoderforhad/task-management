@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 import TaskCard from 'src/common/TaskCard';
 
@@ -22,7 +22,7 @@ export default function PendingTasks() {
   if (filteredPendingTasks.length === 0) {
     return (
       <Grid>
-        Please Mark Some Task Pending. <Link to="/">Go to List.</Link>
+        <Typography>Please Add Some Task. <Link to="/add-task">Add a New Task.</Link></Typography>
       </Grid>
     );
   }

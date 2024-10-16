@@ -88,6 +88,9 @@ const AddTaskForm = () => {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  inputProps={{
+                    min: new Date().toISOString().split('T')[0], // Sets minimum date to today
+                  }}
                   {...register('startDate', { required: 'Start Date is required' })}
                   error={!!errors.startDate}
                   helperText={errors.startDate?.message?.toString()}
@@ -102,6 +105,9 @@ const AddTaskForm = () => {
                   sx={{ width: '100%' }}
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  inputProps={{
+                    min: new Date().toISOString().split('T')[0], // Sets minimum date to today
                   }}
                   {...register('endDate', {
                     required: 'End Date is required',
