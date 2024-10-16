@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Grid } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -10,19 +10,18 @@ import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 
-import { Tasks } from 'src/types/types';
 import { toggleTaskCompleted } from "src/features/add-task/taskSlice";
 
-export default function TaskCard({ tasks }: Tasks) {
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import { Tasks } from 'src/types/types';
+
+export default function TaskCard(tasks : Tasks) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleToogleTask = (task)=> {
-    console.log("task", task)
-
+  const handleToogleTask = (task: Tasks)=> {
     dispatch(toggleTaskCompleted(task.id));
     navigate("/completed-tasks")
   }
-
 
   return (
     <>

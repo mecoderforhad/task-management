@@ -1,7 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import type { Tasks } from "src/types/types";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, FormProvider } from 'react-hook-form';
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { Box, Grid, Button, TextField, Typography } from '@mui/material';
 
@@ -13,7 +15,7 @@ const UpdateTaskForm = () => {
   const navigate = useNavigate();
 
   // Fetch the current task by ID from the state
-  const task = useSelector((state: any) => state.tasks.find((task: any) => task.id === id));
+  const task = useSelector((state: any) => state.tasks.find((singleTask: Tasks) => task.id === id));
 
   const methods = useForm({
     defaultValues: {

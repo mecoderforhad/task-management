@@ -3,6 +3,8 @@ import { nanoid } from 'nanoid'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice } from "@reduxjs/toolkit";
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import { Tasks } from 'src/types/types';
 
 const storedTasks = localStorage.getItem("tasks");
 const initialState = storedTasks ? JSON.parse(storedTasks) : [];
@@ -44,7 +46,7 @@ const taskSlice = createSlice({
     },
 
     toggleTaskCompleted: (state, action) => {
-      const task = state.find((singleTask: Task) => singleTask.id === action.payload);
+      const task = state.find((singleTask: Tasks) => singleTask.id === action.payload);
     
       if (task) {
         // Toggle status between "Completed" and "Pending"

@@ -1,4 +1,5 @@
 export type Tasks = {
+    map: any;
     id: string;
     title: string;
     description: string;
